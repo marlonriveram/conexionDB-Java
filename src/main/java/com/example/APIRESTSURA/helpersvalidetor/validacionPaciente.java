@@ -14,7 +14,8 @@ public class validacionPaciente {
     Pacientes pacinete = new Pacientes();
 
     public Boolean validarNombre(String nombre){
-        return Utilis.validarString("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$",nombre);
+        //return Utilis.validarRegex("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$",nombre);
+        return Utilis.validarRegex("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$", nombre) && Utilis.validarNumCaracteres(nombre, 40);
     }
 
     public Boolean validarFechaNacimiento(LocalDate fecha){
@@ -22,15 +23,15 @@ public class validacionPaciente {
     }
 
     public  Boolean validarCiudad (String ciudad){
-        return Utilis.validarString("^[A-Za-zÁÉÍÓÚáéíóúÑñ\\s]+$",ciudad);
+        return Utilis.validarRegex("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$", ciudad) && Utilis.validarNumCaracteres(ciudad, 50);
     }
 
     public  Boolean validarCorreo (String correo){
-        return Utilis.validarString("^[a-zA-Z0-9._%+-]+@sura\\.com\\.co$",correo);
+        return Utilis.validarRegex("^[a-zA-Z0-9._%+-]+@sura\\.com\\.co$",correo);
     }
 
     public  Boolean validarTelefono ( String telefono){
-        return telefono.length() <= 10;
+        return Utilis.validarNumCaracteres(telefono,10);
     }
 
     public Boolean validarGrupoIngreso(String grupoIngreso){

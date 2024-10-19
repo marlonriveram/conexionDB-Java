@@ -1,8 +1,11 @@
 package com.example.APIRESTSURA.modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity // permite mapear la classe y combertirla en una tabla de la base de datos
 @Table(name = "Pacientes") // sera el nombre de la tabla en la base de datos
@@ -19,6 +22,31 @@ public class Pacientes {
     private Boolean tienePoliza;
     private String grupoIngreso;// debe ser a,b o c
     private LocalDate fechaAfiliacion; // validad entre 1995
+
+
+
+    // Las relaciones son atributos
+
+    // relacion hacia medicos
+    @ManyToOne
+    @JoinColumn(name = "fk_medico",referencedColumnName = "id")
+    @JsonBackReference
+    private Medico medico;
+
+    // relacion hacia signo vital
+    @OneToMany(mappedBy = "paciente")
+    @JsonManagedReference
+    private List<SignoVital> signoVital;
+
+    //relacion hacia enfermedad
+    @OneToMany(mappedBy = "paciente")
+    @JsonManagedReference
+    private List<Enfermedad> enfermedad;
+
+    //relacion hacia medicamento
+    @OneToMany(mappedBy = "paciente")
+    @JsonManagedReference
+    private List<Medicamento> medicamento;
 
     public Pacientes() {
     }

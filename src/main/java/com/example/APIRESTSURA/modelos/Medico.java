@@ -1,24 +1,30 @@
 package com.example.APIRESTSURA.modelos;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import javax.swing.text.StyledEditorKit;
+import java.util.List;
 
 @Entity
-@Table(name = "Midicos")
+@Table(name = "Medicos")
 public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
-    private String matricula;
-    private String especialidad;
-    private Integer salario;
-    private String ips;
-    private String correo;
-    private String telefono;
-    private String direccion;
+    private String nombre; // 50 caracteres solo letras
+    private String matricula; // 20 caracteres
+    private String especialidad; // 50 caracteres
+    private Integer salario; // No puede ser negativo min 8millones max 30 millones
+    private String ips; // 50 caracteres
+    private String correo; // Formato @sura.com.co
+    private String telefono; // 10 caracteres
+    private String direccion; //100 caracteres
     private Boolean estadisponibleFinDeSemana;
+
+    @OneToMany(mappedBy = "medico")
+    @JsonManagedReference
+    private List<Pacientes> paciente;
 
     public Medico() {
     }

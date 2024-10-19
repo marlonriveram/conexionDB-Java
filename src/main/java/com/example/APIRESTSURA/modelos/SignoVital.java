@@ -1,5 +1,6 @@
 package com.example.APIRESTSURA.modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -14,6 +15,12 @@ public class SignoVital {
     private String valor; // mayor a cero y no numeros negativos
     private LocalDate fechaMedida; // no debe ser mayor a 1920
 
+
+    // relacion con pacinete
+    @ManyToOne
+    @JoinColumn(name = "fk_paciente",referencedColumnName = "id")
+    @JsonBackReference
+    private Pacientes paciente;
     public SignoVital() {
     }
 

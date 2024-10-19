@@ -1,5 +1,6 @@
 package com.example.APIRESTSURA.modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,6 +20,12 @@ public class Medicamento {
     private String contraindicaiones;
     private String resgistroInvima;
     private String tieneCopago;
+
+    // relacion hacia paciente
+    @ManyToOne
+    @JoinColumn(name = "fk_paciente",referencedColumnName = "id")
+    @JsonBackReference
+    private Pacientes paciente;
 
     public Medicamento() {
     }

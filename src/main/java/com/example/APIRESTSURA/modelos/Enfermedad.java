@@ -1,5 +1,6 @@
 package com.example.APIRESTSURA.modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,12 @@ public class Enfermedad {
     private String clasificacion;
     private String grado;
     private Double probabilidadVivir;
+
+    // relacion hacia paciente
+    @ManyToOne
+    @JoinColumn(name = "fk_paciente",referencedColumnName = "id")
+    @JsonBackReference
+    private Pacientes paciente;
 
     public Enfermedad() {
     }
