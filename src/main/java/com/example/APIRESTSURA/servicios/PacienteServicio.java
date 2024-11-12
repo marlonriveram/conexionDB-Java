@@ -9,7 +9,9 @@ package com.example.APIRESTSURA.servicios;
 import com.example.APIRESTSURA.modelos.Pacientes;
 import com.example.APIRESTSURA.repositorios.IRepositorioPaciente;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PacienteServicio {
     // para usar un servico debo llamsr al repositorio
 
@@ -21,8 +23,14 @@ public class PacienteServicio {
     //Listo las operaciones que voy a realizar en la base de datos
 
     // registrar un paciente
-     public Pacientes registrarPaciente (Pacientes datospacientes){
-         return  null;
+     public Pacientes registrarPaciente (Pacientes datospacientes) throws Exception{
+         try{
+             // Guardar en bd los datos paciente
+             return iRepositorioPaciente.save(datospacientes);
+
+         }catch (Exception error){
+             throw new Exception (error.getMessage());
+         }
      }
     // buscar los pacientes
 
